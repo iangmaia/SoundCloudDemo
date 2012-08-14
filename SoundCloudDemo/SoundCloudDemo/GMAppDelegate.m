@@ -7,6 +7,8 @@
 //
 
 #import "GMAppDelegate.h"
+#import "SCUI.h"
+
 
 @implementation GMAppDelegate
 
