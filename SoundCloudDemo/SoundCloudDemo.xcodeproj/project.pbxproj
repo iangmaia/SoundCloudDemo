@@ -1,0 +1,279 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3CEAE71A15DAFD1E00A4F175 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71915DAFD1E00A4F175 /* UIKit.framework */; };
+		3CEAE71C15DAFD1E00A4F175 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */; };
+		3CEAE71E15DAFD1E00A4F175 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71D15DAFD1E00A4F175 /* CoreGraphics.framework */; };
+		3CEAE72415DAFD1E00A4F175 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAE72215DAFD1E00A4F175 /* InfoPlist.strings */; };
+		3CEAE72615DAFD1E00A4F175 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAE72515DAFD1E00A4F175 /* main.m */; };
+		3CEAE72A15DAFD1E00A4F175 /* GMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3CEAE71515DAFD1E00A4F175 /* SoundCloudDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundCloudDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CEAE71915DAFD1E00A4F175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3CEAE71D15DAFD1E00A4F175 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3CEAE72115DAFD1E00A4F175 /* SoundCloudDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoundCloudDemo-Info.plist"; sourceTree = "<group>"; };
+		3CEAE72315DAFD1E00A4F175 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3CEAE72515DAFD1E00A4F175 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3CEAE72715DAFD1E00A4F175 /* SoundCloudDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundCloudDemo-Prefix.pch"; sourceTree = "<group>"; };
+		3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMAppDelegate.h; sourceTree = "<group>"; };
+		3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3CEAE71215DAFD1E00A4F175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CEAE71A15DAFD1E00A4F175 /* UIKit.framework in Frameworks */,
+				3CEAE71C15DAFD1E00A4F175 /* Foundation.framework in Frameworks */,
+				3CEAE71E15DAFD1E00A4F175 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CEAE70A15DAFD1D00A4F175 = {
+			isa = PBXGroup;
+			children = (
+				3CEAE71F15DAFD1E00A4F175 /* SoundCloudDemo */,
+				3CEAE71815DAFD1E00A4F175 /* Frameworks */,
+				3CEAE73015DAFD3800A4F175 /* Libraries */,
+				3CEAE71615DAFD1E00A4F175 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3CEAE71615DAFD1E00A4F175 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CEAE71515DAFD1E00A4F175 /* SoundCloudDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3CEAE71815DAFD1E00A4F175 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CEAE71915DAFD1E00A4F175 /* UIKit.framework */,
+				3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */,
+				3CEAE71D15DAFD1E00A4F175 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3CEAE71F15DAFD1E00A4F175 /* SoundCloudDemo */ = {
+			isa = PBXGroup;
+			children = (
+				3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */,
+				3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */,
+				3CEAE72015DAFD1E00A4F175 /* Supporting Files */,
+			);
+			path = SoundCloudDemo;
+			sourceTree = "<group>";
+		};
+		3CEAE72015DAFD1E00A4F175 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CEAE72115DAFD1E00A4F175 /* SoundCloudDemo-Info.plist */,
+				3CEAE72215DAFD1E00A4F175 /* InfoPlist.strings */,
+				3CEAE72515DAFD1E00A4F175 /* main.m */,
+				3CEAE72715DAFD1E00A4F175 /* SoundCloudDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CEAE73015DAFD3800A4F175 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3CEAE71415DAFD1E00A4F175 /* SoundCloudDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CEAE72D15DAFD1E00A4F175 /* Build configuration list for PBXNativeTarget "SoundCloudDemo" */;
+			buildPhases = (
+				3CEAE71115DAFD1E00A4F175 /* Sources */,
+				3CEAE71215DAFD1E00A4F175 /* Frameworks */,
+				3CEAE71315DAFD1E00A4F175 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoundCloudDemo;
+			productName = SoundCloudDemo;
+			productReference = 3CEAE71515DAFD1E00A4F175 /* SoundCloudDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3CEAE70C15DAFD1D00A4F175 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GM;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Ian Guedes Maia";
+			};
+			buildConfigurationList = 3CEAE70F15DAFD1D00A4F175 /* Build configuration list for PBXProject "SoundCloudDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3CEAE70A15DAFD1D00A4F175;
+			productRefGroup = 3CEAE71615DAFD1E00A4F175 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3CEAE71415DAFD1E00A4F175 /* SoundCloudDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3CEAE71315DAFD1E00A4F175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CEAE72415DAFD1E00A4F175 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3CEAE71115DAFD1E00A4F175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CEAE72615DAFD1E00A4F175 /* main.m in Sources */,
+				3CEAE72A15DAFD1E00A4F175 /* GMAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3CEAE72215DAFD1E00A4F175 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CEAE72315DAFD1E00A4F175 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3CEAE72B15DAFD1E00A4F175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CEAE72C15DAFD1E00A4F175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3CEAE72E15DAFD1E00A4F175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoundCloudDemo/SoundCloudDemo-Prefix.pch";
+				INFOPLIST_FILE = "SoundCloudDemo/SoundCloudDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3CEAE72F15DAFD1E00A4F175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoundCloudDemo/SoundCloudDemo-Prefix.pch";
+				INFOPLIST_FILE = "SoundCloudDemo/SoundCloudDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3CEAE70F15DAFD1D00A4F175 /* Build configuration list for PBXProject "SoundCloudDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CEAE72B15DAFD1E00A4F175 /* Debug */,
+				3CEAE72C15DAFD1E00A4F175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CEAE72D15DAFD1E00A4F175 /* Build configuration list for PBXNativeTarget "SoundCloudDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CEAE72E15DAFD1E00A4F175 /* Debug */,
+				3CEAE72F15DAFD1E00A4F175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3CEAE70C15DAFD1D00A4F175 /* Project object */;
+}
