@@ -7,10 +7,23 @@
 //
 
 #import "GMAppDelegate.h"
-#import "SCUI.h"
+#import "SCAPI.h"
 
 
 @implementation GMAppDelegate
+
++ (void)initialize;
+{
+    [SCSoundCloud  setClientID:@"c822012d18dcfa21a11aaacda2f514b6"
+                        secret:@"037ae0bcb3e7ea4b3a68a2e4b27ca63e"
+                   redirectURL:[NSURL URLWithString:@"iansoundclouddemo://"]];
+}
+
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	
+	return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

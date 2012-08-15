@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CA084E515DBE90D00A7DF27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084DF15DBE90D00A7DF27 /* AddressBook.framework */; };
+		3CA084E615DBE90D00A7DF27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E015DBE90D00A7DF27 /* AddressBookUI.framework */; };
+		3CA084E715DBE90D00A7DF27 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E115DBE90D00A7DF27 /* CoreLocation.framework */; };
+		3CA084E815DBE90D00A7DF27 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E215DBE90D00A7DF27 /* CoreText.framework */; };
+		3CA084E915DBE90D00A7DF27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E315DBE90D00A7DF27 /* QuartzCore.framework */; };
+		3CA084EA15DBE90D00A7DF27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E415DBE90D00A7DF27 /* Security.framework */; };
+		3CD807B615DBF49F00E46B03 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD807B415DBF49F00E46B03 /* libOAuth2Client.a */; };
+		3CD807B715DBF49F00E46B03 /* libSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD807B515DBF49F00E46B03 /* libSoundCloudAPI.a */; };
 		3CEAE71A15DAFD1E00A4F175 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71915DAFD1E00A4F175 /* UIKit.framework */; };
 		3CEAE71C15DAFD1E00A4F175 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */; };
 		3CEAE71E15DAFD1E00A4F175 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEAE71D15DAFD1E00A4F175 /* CoreGraphics.framework */; };
@@ -16,6 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CA084DF15DBE90D00A7DF27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		3CA084E015DBE90D00A7DF27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3CA084E115DBE90D00A7DF27 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3CA084E215DBE90D00A7DF27 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3CA084E315DBE90D00A7DF27 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3CA084E415DBE90D00A7DF27 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3CD807B415DBF49F00E46B03 /* libOAuth2Client.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libOAuth2Client.a; path = "../OAuth2Client/build/Release-iphoneos/libOAuth2Client.a"; sourceTree = "<group>"; };
+		3CD807B515DBF49F00E46B03 /* libSoundCloudAPI.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSoundCloudAPI.a; path = "../CocoaSoundCloudAPI/build/Release-iphoneos/libSoundCloudAPI.a"; sourceTree = "<group>"; };
 		3CEAE71515DAFD1E00A4F175 /* SoundCloudDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundCloudDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEAE71915DAFD1E00A4F175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -33,9 +49,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD807B615DBF49F00E46B03 /* libOAuth2Client.a in Frameworks */,
+				3CD807B715DBF49F00E46B03 /* libSoundCloudAPI.a in Frameworks */,
+				3CA084E515DBE90D00A7DF27 /* AddressBook.framework in Frameworks */,
+				3CA084E615DBE90D00A7DF27 /* AddressBookUI.framework in Frameworks */,
+				3CA084E715DBE90D00A7DF27 /* CoreLocation.framework in Frameworks */,
+				3CA084E815DBE90D00A7DF27 /* CoreText.framework in Frameworks */,
+				3CA084E915DBE90D00A7DF27 /* QuartzCore.framework in Frameworks */,
+				3CA084EA15DBE90D00A7DF27 /* Security.framework in Frameworks */,
+				3CEAE71E15DAFD1E00A4F175 /* CoreGraphics.framework in Frameworks */,
 				3CEAE71A15DAFD1E00A4F175 /* UIKit.framework in Frameworks */,
 				3CEAE71C15DAFD1E00A4F175 /* Foundation.framework in Frameworks */,
-				3CEAE71E15DAFD1E00A4F175 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +86,14 @@
 		3CEAE71815DAFD1E00A4F175 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CD807B415DBF49F00E46B03 /* libOAuth2Client.a */,
+				3CD807B515DBF49F00E46B03 /* libSoundCloudAPI.a */,
+				3CA084DF15DBE90D00A7DF27 /* AddressBook.framework */,
+				3CA084E015DBE90D00A7DF27 /* AddressBookUI.framework */,
+				3CA084E115DBE90D00A7DF27 /* CoreLocation.framework */,
+				3CA084E215DBE90D00A7DF27 /* CoreText.framework */,
+				3CA084E315DBE90D00A7DF27 /* QuartzCore.framework */,
+				3CA084E415DBE90D00A7DF27 /* Security.framework */,
 				3CEAE71915DAFD1E00A4F175 /* UIKit.framework */,
 				3CEAE71B15DAFD1E00A4F175 /* Foundation.framework */,
 				3CEAE71D15DAFD1E00A4F175 /* CoreGraphics.framework */,
@@ -175,7 +207,7 @@
 		3CEAE72B15DAFD1E00A4F175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -194,8 +226,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "../**";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -204,7 +240,7 @@
 		3CEAE72C15DAFD1E00A4F175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -216,9 +252,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "../**";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -228,11 +268,16 @@
 		3CEAE72E15DAFD1E00A4F175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundCloudDemo/SoundCloudDemo-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "../**";
 				INFOPLIST_FILE = "SoundCloudDemo/SoundCloudDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"../**",
+					"\"$(SRCROOT)/../CocoaSoundCloudAPI/build/UninstalledProducts\"",
+					"\"$(SRCROOT)/../OAuth2Client/build/UninstalledProducts\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
@@ -242,11 +287,16 @@
 		3CEAE72F15DAFD1E00A4F175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundCloudDemo/SoundCloudDemo-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "../**";
 				INFOPLIST_FILE = "SoundCloudDemo/SoundCloudDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"../**",
+					"\"$(SRCROOT)/../CocoaSoundCloudAPI/build/UninstalledProducts\"",
+					"\"$(SRCROOT)/../OAuth2Client/build/UninstalledProducts\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
