@@ -10,4 +10,13 @@
    <FileRef
       location = "group:CocoaSoundCloudAPI/SoundCloudAPI.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:OHAttributedLabel/OHAttributedLabel.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CocoaSoundCloudUI/SoundCloudUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:JSONKit/JSONKit.xcodeproj">
+   </FileRef>
 </Workspace>

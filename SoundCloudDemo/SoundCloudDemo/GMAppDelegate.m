@@ -7,6 +7,7 @@
 //
 
 #import "GMAppDelegate.h"
+#import "GMLoginViewController.h"
 #import "SCAPI.h"
 
 
@@ -16,7 +17,7 @@
 {
     [SCSoundCloud  setClientID:@"c822012d18dcfa21a11aaacda2f514b6"
                         secret:@"037ae0bcb3e7ea4b3a68a2e4b27ca63e"
-                   redirectURL:[NSURL URLWithString:@"iansoundclouddemo://"]];
+                   redirectURL:[NSURL URLWithString:@"iansoundclouddemo://soundcloud"]];
 }
 
 
@@ -30,7 +31,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+	
+	GMLoginViewController *loginVC = [[GMLoginViewController alloc] init];
+	UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+	rootVC.navigationBarHidden = YES;
+	
+	self.window.rootViewController = rootVC;
+	
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
