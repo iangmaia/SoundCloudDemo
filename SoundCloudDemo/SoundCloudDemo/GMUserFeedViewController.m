@@ -7,11 +7,12 @@
 //
 
 #import "GMUserFeedViewController.h"
+#import "JSONKit.h"
 #import "SCSoundCloud.h"
-
+#import "SCRequest.h"
 
 @interface GMUserFeedViewController ()
-
+	- (void) reloadSoundCloudData;
 @end
 
 @implementation GMUserFeedViewController
@@ -28,9 +29,71 @@
 - (IBAction)logoutButtonClick:(id)sender {
 	NSLog(@"Logging out");
 	
+	if (requestObj) {
+		[SCRequest cancelRequest:requestObj];
+	}
+
 	[SCSoundCloud removeAccess];
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)reloadButtonClick:(id)sender {
+	[self reloadSoundCloudData];
+}
+
+- (void) reloadSoundCloudData {
+	if (requestObj) {
+		[SCRequest cancelRequest:requestObj];
+	}
+	
+	[activityIndicator startAnimating];
+
+	SCRequestResponseHandler userResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error){
+		// Handle the response
+		if (error) {
+			NSLog(@"Ooops, something went wrong with request: %@", [error localizedDescription]);
+			
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
+												  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+			[alert show];
+			
+			[activityIndicator stopAnimating];
+
+		} else {
+			[self requestUserTracks];
+		}
+	};
+	
+	SCAccount *account = [SCSoundCloud account];
+	requestObj = [SCRequest performMethod:SCRequestMethodGET
+						   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me.json"]
+					  usingParameters:nil
+						  withAccount:account
+			   sendingProgressHandler:nil
+					  responseHandler:userResponseHandler];
+}
+
+- (void) requestUserTracks {
+	SCRequestResponseHandler tracksResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error) {
+		[activityIndicator stopAnimating];
+
+		// Handle the response
+		if (error) {
+		}
+		else {
+			
+		}
+	};
+	
+	
+	SCAccount *account = [SCSoundCloud account];
+	requestObj = [SCRequest performMethod:SCRequestMethodGET
+							   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/tracks.json"]
+						  usingParameters:nil
+							  withAccount:account
+				   sendingProgressHandler:nil
+						  responseHandler:tracksResponseHandler];
 }
 
 #pragma mark -
@@ -61,6 +124,10 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+	[self reloadSoundCloudData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

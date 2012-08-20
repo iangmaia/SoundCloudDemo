@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface GMUserFeedViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+	id requestObj;
+	
+	
 	IBOutlet UIActivityIndicatorView *activityIndicator;
+
+	IBOutlet UIButton *reloadButton;
 }
 
 
 - (IBAction)logoutButtonClick:(id)sender;
+- (IBAction)reloadButtonClick:(id)sender;
 
 
 @end
