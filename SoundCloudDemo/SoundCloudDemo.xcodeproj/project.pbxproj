@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C3AAADB15E2850300D3E30B /* GMUserFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */; };
+		3C3AAADC15E2850300D3E30B /* GMUserFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */; };
 		3C41849615DD90D600FD9E12 /* GMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C41849415DD90D600FD9E12 /* GMLoginViewController.m */; };
 		3C41849715DD90D600FD9E12 /* GMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C41849515DD90D600FD9E12 /* GMLoginViewController.xib */; };
 		3C4184C515DD9F2900FD9E12 /* OAuth2Client.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 3C4184C415DD9F2900FD9E12 /* OAuth2Client.xcodeproj */; };
@@ -136,6 +138,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C3AAAD815E2850300D3E30B /* GMUserFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUserFeedViewController.h; sourceTree = "<group>"; };
+		3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUserFeedViewController.m; sourceTree = "<group>"; };
+		3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMUserFeedViewController.xib; sourceTree = "<group>"; };
 		3C41849315DD90D600FD9E12 /* GMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMLoginViewController.h; sourceTree = "<group>"; };
 		3C41849415DD90D600FD9E12 /* GMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMLoginViewController.m; sourceTree = "<group>"; };
 		3C41849515DD90D600FD9E12 /* GMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMLoginViewController.xib; sourceTree = "<group>"; };
@@ -296,6 +301,9 @@
 				3C41849315DD90D600FD9E12 /* GMLoginViewController.h */,
 				3C41849415DD90D600FD9E12 /* GMLoginViewController.m */,
 				3C41849515DD90D600FD9E12 /* GMLoginViewController.xib */,
+				3C3AAAD815E2850300D3E30B /* GMUserFeedViewController.h */,
+				3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */,
+				3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */,
 				3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */,
 				3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */,
 				3CEAE72015DAFD1E00A4F175 /* Supporting Files */,
@@ -468,6 +476,7 @@
 				3C4184CB15DD9F5700FD9E12 /* SoundCloudUI.xcodeproj in Resources */,
 				3C4184CD15DD9F6E00FD9E12 /* JSONKit.xcodeproj in Resources */,
 				3CC0428515DDA4380085AC1B /* SoundCloud.bundle in Resources */,
+				3C3AAADC15E2850300D3E30B /* GMUserFeedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +490,7 @@
 				3CEAE72615DAFD1E00A4F175 /* main.m in Sources */,
 				3CEAE72A15DAFD1E00A4F175 /* GMAppDelegate.m in Sources */,
 				3C41849615DD90D600FD9E12 /* GMLoginViewController.m in Sources */,
+				3C3AAADB15E2850300D3E30B /* GMUserFeedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

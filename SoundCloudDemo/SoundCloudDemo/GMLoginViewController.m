@@ -11,6 +11,8 @@
 #import "SCLoginViewController.h"
 #import "SCUIErrors.h"
 
+#import "GMUserFeedViewController.h"
+
 @interface GMLoginViewController ()
 
 @end
@@ -31,10 +33,18 @@
 	SCLoginViewControllerComletionHandler handler = ^(NSError *error) {
 		if (SC_CANCELED(error)) {
 			NSLog(@"Canceled!");
+
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log-in error" message:@"User has cancelled login" delegate:nil
+							 cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+			[alert show];
 		} else if (error) {
-			NSLog(@"Error: %@", [error localizedDescription]);
+			NSLog(@"Login error");
+			
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log-in error" message:@"Error while logging in" delegate:nil
+												  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+			[alert show];
 		} else {
-			NSLog(@"Done!");
+			NSLog(@"User has logged in");
 		}
 	};
 	
@@ -48,6 +58,13 @@
 	}];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	if ([SCSoundCloud account]) {
+		GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] initWithNibName:@"GMUserFeedViewController" bundle:nil];
+		userFeed.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		[self presentViewController:userFeed animated:YES completion:nil];
+	}
+}
 
 - (void)viewDidLoad
 {
