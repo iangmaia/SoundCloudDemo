@@ -7,6 +7,9 @@
 //
 
 #import "GMUserFeedViewController.h"
+#import "GMFeedViewCell.h"
+
+//sc
 #import "JSONKit.h"
 #import "SCSoundCloud.h"
 #import "SCRequest.h"
@@ -21,7 +24,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -29,9 +31,8 @@
 - (IBAction)logoutButtonClick:(id)sender {
 	NSLog(@"Logging out");
 	
-	if (requestObj) {
-		[SCRequest cancelRequest:requestObj];
-	}
+	[SCRequest cancelRequest:userRequestObj];
+	[SCRequest cancelRequest:tracksRequestObj];
 
 	[SCSoundCloud removeAccess];
 	
@@ -39,13 +40,14 @@
 }
 
 - (IBAction)reloadButtonClick:(id)sender {
-	[self reloadSoundCloudData];
+	[self requestUserTracks];
 }
 
+#pragma mark -
+#pragma mark data fetching methods
 - (void) reloadSoundCloudData {
-	if (requestObj) {
-		[SCRequest cancelRequest:requestObj];
-	}
+	[SCRequest cancelRequest:userRequestObj];
+	[SCRequest cancelRequest:tracksRequestObj];
 	
 	[activityIndicator startAnimating];
 
@@ -61,12 +63,14 @@
 			[activityIndicator stopAnimating];
 
 		} else {
+			NSLog(@"%@", [data objectFromJSONData]);
+			
 			[self requestUserTracks];
 		}
 	};
 	
 	SCAccount *account = [SCSoundCloud account];
-	requestObj = [SCRequest performMethod:SCRequestMethodGET
+	userRequestObj = [SCRequest performMethod:SCRequestMethodGET
 						   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me.json"]
 					  usingParameters:nil
 						  withAccount:account
@@ -80,15 +84,23 @@
 
 		// Handle the response
 		if (error) {
+			NSLog(@"Error fetching user's tracks");
 		}
 		else {
+			
+			userTracksData = [data objectFromJSONData];
+			
+			[feedTable reloadData];
+			
+			NSLog(@"%@", userTracksData);
+			
 			
 		}
 	};
 	
 	
 	SCAccount *account = [SCSoundCloud account];
-	requestObj = [SCRequest performMethod:SCRequestMethodGET
+	tracksRequestObj = [SCRequest performMethod:SCRequestMethodGET
 							   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/tracks.json"]
 						  usingParameters:nil
 							  withAccount:account
@@ -103,11 +115,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 0;
+	return [userTracksData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return nil;
+	
+	GMFeedViewCell *cell = [GMFeedViewCell getFeedCellForTable:tableView atIndexPath:indexPath
+												  withFeedData:[userTracksData objectAtIndex:indexPath.row]];
+	
+	
+	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 107;
 }
 
 #pragma mark -

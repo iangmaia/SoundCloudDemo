@@ -16,6 +16,9 @@
 		3C4184C915DD9F4C00FD9E12 /* OHAttributedLabel.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 3C4184C815DD9F4C00FD9E12 /* OHAttributedLabel.xcodeproj */; };
 		3C4184CB15DD9F5700FD9E12 /* SoundCloudUI.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 3C4184CA15DD9F5700FD9E12 /* SoundCloudUI.xcodeproj */; };
 		3C4184CD15DD9F6E00FD9E12 /* JSONKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 3C4184CC15DD9F6E00FD9E12 /* JSONKit.xcodeproj */; };
+		3C8A0F1615E3FE6D009A396F /* GMImageCacheLRU.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A0F1515E3FE6D009A396F /* GMImageCacheLRU.m */; };
+		3C8A0F2115E41D79009A396F /* GMFeedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A0F2015E41D79009A396F /* GMFeedViewCell.m */; };
+		3C8A0F2515E41E6B009A396F /* GMFeedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A0F2415E41E6B009A396F /* GMFeedViewCell.xib */; };
 		3CA084E515DBE90D00A7DF27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084DF15DBE90D00A7DF27 /* AddressBook.framework */; };
 		3CA084E615DBE90D00A7DF27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E015DBE90D00A7DF27 /* AddressBookUI.framework */; };
 		3CA084E715DBE90D00A7DF27 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA084E115DBE90D00A7DF27 /* CoreLocation.framework */; };
@@ -149,6 +152,11 @@
 		3C4184C815DD9F4C00FD9E12 /* OHAttributedLabel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHAttributedLabel.xcodeproj; path = ../OHAttributedLabel/OHAttributedLabel.xcodeproj; sourceTree = "<group>"; };
 		3C4184CA15DD9F5700FD9E12 /* SoundCloudUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoundCloudUI.xcodeproj; path = ../CocoaSoundCloudUI/SoundCloudUI.xcodeproj; sourceTree = "<group>"; };
 		3C4184CC15DD9F6E00FD9E12 /* JSONKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSONKit.xcodeproj; path = ../JSONKit/JSONKit.xcodeproj; sourceTree = "<group>"; };
+		3C8A0F1415E3FE6D009A396F /* GMImageCacheLRU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMImageCacheLRU.h; sourceTree = "<group>"; };
+		3C8A0F1515E3FE6D009A396F /* GMImageCacheLRU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMImageCacheLRU.m; sourceTree = "<group>"; };
+		3C8A0F1F15E41D79009A396F /* GMFeedViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMFeedViewCell.h; sourceTree = "<group>"; };
+		3C8A0F2015E41D79009A396F /* GMFeedViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMFeedViewCell.m; sourceTree = "<group>"; };
+		3C8A0F2415E41E6B009A396F /* GMFeedViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMFeedViewCell.xib; sourceTree = "<group>"; };
 		3CA084DF15DBE90D00A7DF27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3CA084E015DBE90D00A7DF27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3CA084E115DBE90D00A7DF27 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -298,12 +306,17 @@
 		3CEAE71F15DAFD1E00A4F175 /* SoundCloudDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3C8A0F1415E3FE6D009A396F /* GMImageCacheLRU.h */,
+				3C8A0F1515E3FE6D009A396F /* GMImageCacheLRU.m */,
 				3C41849315DD90D600FD9E12 /* GMLoginViewController.h */,
 				3C41849415DD90D600FD9E12 /* GMLoginViewController.m */,
 				3C41849515DD90D600FD9E12 /* GMLoginViewController.xib */,
 				3C3AAAD815E2850300D3E30B /* GMUserFeedViewController.h */,
 				3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */,
 				3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */,
+				3C8A0F1F15E41D79009A396F /* GMFeedViewCell.h */,
+				3C8A0F2015E41D79009A396F /* GMFeedViewCell.m */,
+				3C8A0F2415E41E6B009A396F /* GMFeedViewCell.xib */,
 				3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */,
 				3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */,
 				3CEAE72015DAFD1E00A4F175 /* Supporting Files */,
@@ -477,6 +490,7 @@
 				3C4184CD15DD9F6E00FD9E12 /* JSONKit.xcodeproj in Resources */,
 				3CC0428515DDA4380085AC1B /* SoundCloud.bundle in Resources */,
 				3C3AAADC15E2850300D3E30B /* GMUserFeedViewController.xib in Resources */,
+				3C8A0F2515E41E6B009A396F /* GMFeedViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +505,8 @@
 				3CEAE72A15DAFD1E00A4F175 /* GMAppDelegate.m in Sources */,
 				3C41849615DD90D600FD9E12 /* GMLoginViewController.m in Sources */,
 				3C3AAADB15E2850300D3E30B /* GMUserFeedViewController.m in Sources */,
+				3C8A0F1615E3FE6D009A396F /* GMImageCacheLRU.m in Sources */,
+				3C8A0F2115E41D79009A396F /* GMFeedViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

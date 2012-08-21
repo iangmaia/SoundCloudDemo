@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface GMUserFeedViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
-	id requestObj;
+	id userRequestObj;
+	id tracksRequestObj;
 	
 	
+	IBOutlet UITableView *feedTable;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
-
 	IBOutlet UIButton *reloadButton;
+	
+	NSArray *userTracksData;
 }
 
 
