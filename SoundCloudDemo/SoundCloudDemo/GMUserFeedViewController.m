@@ -16,6 +16,9 @@
 
 @interface GMUserFeedViewController ()
 	- (void) reloadSoundCloudData;
+	- (void) requestUserTracks;
+	- (void) loadUserImageWithUrl:(NSString*)url;
+	- (void) errorFetchingData;
 @end
 
 @implementation GMUserFeedViewController
@@ -56,9 +59,9 @@
 		if (error) {
 			NSLog(@"Ooops, something went wrong with request: %@", [error localizedDescription]);
 			
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
-												  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-			[alert show];
+			[activityIndicator stopAnimating];
+
+			[self errorFetchingData];
 
 		} else {
 			userData = [data objectFromJSONData];
@@ -93,6 +96,8 @@
 		// Handle the response
 		if (error) {
 			NSLog(@"Error fetching user's tracks");
+			
+			[self errorFetchingData];
 		}
 		else {
 			
@@ -100,7 +105,7 @@
 			
 			[feedTable reloadData];
 			
-			NSLog(@"%@", userTracksData);
+			//NSLog(@"%@", userTracksData);
 		}
 	};
 	
@@ -127,6 +132,12 @@
 	});
 	
 	dispatch_release(queue);
+}
+
+- (void) errorFetchingData {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
+										  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+	[alert show];
 }
 
 #pragma mark -
