@@ -11,13 +11,16 @@
 @interface GMUserFeedViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
 	id userRequestObj;
 	id tracksRequestObj;
-	
+
+	IBOutlet UIImageView *userImage;
+	//IBOutlet UILabel *userNameLabel;
 	
 	IBOutlet UITableView *feedTable;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
 	IBOutlet UIButton *reloadButton;
 	
 	NSArray *userTracksData;
+	NSDictionary *userData;
 }
 
 

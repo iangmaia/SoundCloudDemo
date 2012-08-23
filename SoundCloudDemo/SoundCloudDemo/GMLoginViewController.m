@@ -58,6 +58,9 @@
 	}];
 }
 
+#pragma mark - 
+#pragma mark view lifecycle
+
 - (void) viewDidAppear:(BOOL)animated {
 	if ([SCSoundCloud account]) {
 		GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] initWithNibName:@"GMUserFeedViewController" bundle:nil];

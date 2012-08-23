@@ -306,8 +306,6 @@
 		3CEAE71F15DAFD1E00A4F175 /* SoundCloudDemo */ = {
 			isa = PBXGroup;
 			children = (
-				3C8A0F1415E3FE6D009A396F /* GMImageCacheLRU.h */,
-				3C8A0F1515E3FE6D009A396F /* GMImageCacheLRU.m */,
 				3C41849315DD90D600FD9E12 /* GMLoginViewController.h */,
 				3C41849415DD90D600FD9E12 /* GMLoginViewController.m */,
 				3C41849515DD90D600FD9E12 /* GMLoginViewController.xib */,
@@ -317,6 +315,8 @@
 				3C8A0F1F15E41D79009A396F /* GMFeedViewCell.h */,
 				3C8A0F2015E41D79009A396F /* GMFeedViewCell.m */,
 				3C8A0F2415E41E6B009A396F /* GMFeedViewCell.xib */,
+				3C8A0F1415E3FE6D009A396F /* GMImageCacheLRU.h */,
+				3C8A0F1515E3FE6D009A396F /* GMImageCacheLRU.m */,
 				3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */,
 				3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */,
 				3CEAE72015DAFD1E00A4F175 /* Supporting Files */,

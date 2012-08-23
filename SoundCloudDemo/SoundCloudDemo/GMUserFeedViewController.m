@@ -59,11 +59,12 @@
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
 												  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 			[alert show];
-			
-			[activityIndicator stopAnimating];
 
 		} else {
-			NSLog(@"%@", [data objectFromJSONData]);
+			userData = [data objectFromJSONData];
+			//NSLog(@"%@", userData);
+			
+			[self loadUserImageWithUrl:[userData objectForKey:@"avatar_url"]];
 			
 			[self requestUserTracks];
 		}
@@ -79,6 +80,13 @@
 }
 
 - (void) requestUserTracks {
+	[SCRequest cancelRequest:tracksRequestObj];
+	
+	[activityIndicator startAnimating];
+
+	userTracksData = nil;
+	[feedTable reloadData];
+
 	SCRequestResponseHandler tracksResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error) {
 		[activityIndicator stopAnimating];
 
@@ -88,30 +96,59 @@
 		}
 		else {
 			
-			userTracksData = [data objectFromJSONData];
+			userTracksData = [[data objectFromJSONData] objectForKey:@"collection"];
 			
 			[feedTable reloadData];
 			
 			NSLog(@"%@", userTracksData);
-			
-			
 		}
 	};
 	
 	
 	SCAccount *account = [SCSoundCloud account];
 	tracksRequestObj = [SCRequest performMethod:SCRequestMethodGET
-							   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/tracks.json"]
+							   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"]
 						  usingParameters:nil
 							  withAccount:account
 				   sendingProgressHandler:nil
 						  responseHandler:tracksResponseHandler];
 }
 
+- (void) loadUserImageWithUrl:(NSString*)url {
+	dispatch_queue_t queue = dispatch_queue_create("ianscdemo.ImgLoaderQueue", NULL);
+	
+	dispatch_async(queue, ^{
+		NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+		UIImage *image = [UIImage imageWithData:imageData];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			userImage.image = image;
+		});
+	});
+	
+	dispatch_release(queue);
+}
+
 #pragma mark -
 #pragma mark table related methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
+	NSNumber *trackId = [[[userTracksData objectAtIndex:indexPath.row] objectForKey:@"origin"] objectForKey:@"id"];
+	
+	NSString *urlStr = [NSString stringWithFormat:@"soundcloud:track:%@", trackId];
+	
+	NSURL *url = [NSURL URLWithString:urlStr];
+
+	if ([[UIApplication sharedApplication] canOpenURL:url]) {
+		[[UIApplication sharedApplication] openURL:url];
+	}
+	else {
+		NSString *permaLink = [[[userTracksData objectAtIndex:indexPath.row]
+							  objectForKey:@"origin"] objectForKey:@"permalink_url"];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:permaLink]];
+	}
+	
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -121,14 +158,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	GMFeedViewCell *cell = [GMFeedViewCell getFeedCellForTable:tableView atIndexPath:indexPath
-												  withFeedData:[userTracksData objectAtIndex:indexPath.row]];
+												  withFeedData:[[userTracksData
+																 objectAtIndex:indexPath.row] objectForKey:@"origin"]];
 	
 	
 	return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	NSString *userNameStr = [userData objectForKey:@"username"];
+	
+	NSString *header = nil;
+	
+	if (userNameStr) {
+		header = [NSString stringWithFormat:@"%@ dashboard", userNameStr];
+	}
+	else {
+		header = @"Loading user data...";
+	}
+	
+	return header;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 107;
+	return 120;
 }
 
 #pragma mark -
@@ -137,7 +190,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload

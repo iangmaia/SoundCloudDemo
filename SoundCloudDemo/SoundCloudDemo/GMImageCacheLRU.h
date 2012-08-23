@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-#define IMG_CACHE_SIZE 80
+#define IMG_CACHE_SIZE 120
 
 
 @interface GMImageCacheLRU : NSObject
@@ -17,7 +17,7 @@
 
 + (GMImageCacheLRU *) sharedImageCache;
 
-- (void) addImageToCache:(UIImage*)image withKey:(id)key;
+- (void) addImageToCache:(UIImage*)image withKey:(NSString*)cachekey;
 - (void) clearCache;
 - (UIImage*) getImageForKey:(NSString*)cacheKey;
 

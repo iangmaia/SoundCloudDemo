@@ -35,28 +35,25 @@ static GMImageCacheLRU *sharedGMImageCache;
 	return self;
 }
 
-- (void) addImageToCache:(UIImage*)image withKey:(id)cachekey {
-	NSString *key = [NSString stringWithFormat:@"%@", cachekey];
-	
+- (void) addImageToCache:(UIImage*)image withKey:(NSString*)cachekey {
 	@synchronized(self) {
-		if (![cacheData objectForKey:key]) {
+		if (![cacheData objectForKey:cachekey]) {
 			
 			if ([orderUsed count] >= IMG_CACHE_SIZE) {
 				[self removeLeastRecentlyUsed]; //add room for one more removing the oldest image
 			}
 			
-			[orderUsed addObject:key];
-			[cacheData setValue:image forKey:key];
+			[orderUsed addObject:cachekey];
+			[cacheData setValue:image forKey:cachekey];
 		}
 	}
 }
 
 - (UIImage*) getImageForKey:(NSString*)cacheKey {
 	UIImage *img = nil;
-	NSString *key = [NSString stringWithFormat:@"%@", cacheKey];
-	
+
 	@synchronized(self) {
-		img = [cacheData objectForKey:key];
+		img = [cacheData objectForKey:cacheKey];
 		
 		//if we had an image, promote image to a 'newer' index
 		if (img) {
