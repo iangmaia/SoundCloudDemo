@@ -179,6 +179,10 @@ static NSDateFormatter *scDateFormatter;
 
 	dispatch_async(queue, ^{
 		NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+		if (!imageData || [imageData length] <= 0) {
+			return;
+		}
+		
 		UIImage *image = [UIImage imageWithData:imageData];
 		
 		//if is a wave, cut the half of the image
