@@ -36,6 +36,8 @@ static GMImageCacheLRU *sharedGMImageCache;
 }
 
 - (void) addImageToCache:(UIImage*)image withKey:(NSString*)cachekey {
+	if (!image || !cachekey) return;
+	
 	@synchronized(self) {
 		if (![cacheData objectForKey:cachekey]) {
 			
@@ -44,7 +46,7 @@ static GMImageCacheLRU *sharedGMImageCache;
 			}
 			
 			[orderUsed addObject:cachekey];
-			[cacheData setValue:image forKey:cachekey];
+			[cacheData setObject:image forKey:cachekey];
 		}
 	}
 }
@@ -57,8 +59,8 @@ static GMImageCacheLRU *sharedGMImageCache;
 		
 		//if we had an image, promote image to a 'newer' index
 		if (img) {
-			[orderUsed removeObject:img];
-			[orderUsed addObject:img];
+			[orderUsed removeObject:cacheKey];
+			[orderUsed addObject:cacheKey];
 		}
 	}
 	
@@ -81,8 +83,6 @@ static GMImageCacheLRU *sharedGMImageCache;
 	@synchronized(self) {
 		[cacheData removeAllObjects];
 		[orderUsed removeAllObjects];
-		cacheData = nil;
-		orderUsed = nil;
 		
 		cacheData = [NSMutableDictionary dictionaryWithCapacity:IMG_CACHE_SIZE];
 		orderUsed = [NSMutableArray arrayWithCapacity:IMG_CACHE_SIZE];

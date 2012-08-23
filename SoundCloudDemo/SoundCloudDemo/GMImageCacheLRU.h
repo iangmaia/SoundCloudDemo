@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-#define IMG_CACHE_SIZE 120
+#define IMG_CACHE_SIZE 300
 
 
 @interface GMImageCacheLRU : NSObject
