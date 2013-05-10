@@ -7,7 +7,6 @@
 //
 
 #import "GMFeedViewCell.h"
-#import "GMImageCacheLRU.h"
 
 @interface GMFeedViewCell()
 
@@ -21,12 +20,8 @@
 
 @implementation GMFeedViewCell
 
-static NSString *identifier = @"GMFeedViewCell";
+static NSCache *imagesCache;
 static NSDateFormatter *scDateFormatter;
-
-- (NSString *) reuseIdentifier {
-	return identifier;
-}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	self = [super initWithCoder:aDecoder];
@@ -53,6 +48,8 @@ static NSDateFormatter *scDateFormatter;
 
 
 + (GMFeedViewCell*) getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withFeedData:(NSDictionary*)feed {
+    static NSString * const identifier = @"GMFeedViewCell";
+
 	GMFeedViewCell *cell = (GMFeedViewCell*) [tableView dequeueReusableCellWithIdentifier:identifier];
 	
 	if (cell == nil) {
@@ -60,8 +57,6 @@ static NSDateFormatter *scDateFormatter;
 
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
-	
-	GMImageCacheLRU *cache = [GMImageCacheLRU sharedImageCache];
 	
 	NSString *artWorkUrl = [feed objectForKey:@"artwork_url"];
 	if (!artWorkUrl || ((NSNull*)artWorkUrl == [NSNull null])) {
@@ -72,7 +67,7 @@ static NSDateFormatter *scDateFormatter;
 		}
 	}
 	
-	UIImage *artWorkImg = [cache getImageForKey:artWorkUrl];
+	UIImage *artWorkImg = [imagesCache objectForKey:artWorkUrl];
 	if (artWorkImg) {
 		cell->userAvatarImg.image = artWorkImg;
 		[cell setNeedsDisplay];
@@ -84,7 +79,7 @@ static NSDateFormatter *scDateFormatter;
 					onCellIndexPath:indexPath isWaveForm:NO];
 	}
 	
-	UIImage *usrWaveImg = [cache getImageForKey:[feed objectForKey:@"waveform_url"]];
+	UIImage *usrWaveImg = [imagesCache objectForKey:[feed objectForKey:@"waveform_url"]];
 	if (usrWaveImg) {
 		cell->trackWaveImg.image = usrWaveImg;
 		cell->trackWaveImg.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:104.0/255.00 blue:13.0/255.0 alpha:1.0];
@@ -165,8 +160,6 @@ static NSDateFormatter *scDateFormatter;
 	return [NSString stringWithFormat:@"%d %@ ago", (int) timeAmount, timeUnit];
 }
 
-/* a more sophisticated solution would be to use NSOperationQueue to limit bandwith with a queue limit,
- or use a library like SDWebImage */
 - (void) loadImageForTableView:(UITableView*)tableView withUrl:(NSString*)url toImageView:(UIImageView*)img
 			   onCellIndexPath:(NSIndexPath*)cellIndex isWaveForm:(BOOL)isWaveForm {
 
@@ -179,7 +172,7 @@ static NSDateFormatter *scDateFormatter;
 
 	dispatch_async(queue, ^{
 		NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-		if (!imageData || [imageData length] <= 0) {
+		if (!imageData || ![imageData length]) {
 			return;
 		}
 		
@@ -187,14 +180,13 @@ static NSDateFormatter *scDateFormatter;
 		
 		//if is a wave, cut the half of the image
 		if (isWaveForm) {
-			UIGraphicsBeginImageContext( CGSizeMake(320, 71) );
+			UIGraphicsBeginImageContext( CGSizeMake(320, 71));
 			[image drawInRect:CGRectMake(0, 0, 320, 142)];
 			image = UIGraphicsGetImageFromCurrentImageContext();
 			UIGraphicsEndImageContext();
 		}
 		
-		GMImageCacheLRU *cache = [GMImageCacheLRU sharedImageCache];
-		[cache addImageToCache:image withKey:url];
+		[imagesCache setObject:image forKey:url];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if ([[tableView indexPathsForVisibleRows] containsObject:cellIndex]) {

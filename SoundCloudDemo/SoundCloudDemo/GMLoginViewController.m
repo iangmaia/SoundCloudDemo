@@ -29,8 +29,7 @@
 }
 
 - (IBAction)loginButtonClick:(id)sender {
-	//comletion? :-)
-	SCLoginViewControllerComletionHandler handler = ^(NSError *error) {
+	SCLoginViewControllerCompletionHandler handler = ^(NSError *error) {
 		if (SC_CANCELED(error)) {
 			NSLog(@"Canceled!");
 

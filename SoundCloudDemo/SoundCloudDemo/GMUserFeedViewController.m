@@ -8,7 +8,6 @@
 
 #import "GMUserFeedViewController.h"
 #import "GMFeedViewCell.h"
-#import "GMImageCacheLRU.h"
 
 //sc
 #import "JSONKit.h"
@@ -40,8 +39,6 @@
 
 	[SCSoundCloud removeAccess];
 	
-	[[GMImageCacheLRU sharedImageCache] clearCache];
-
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -215,12 +212,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self reloadSoundCloudData];
-}
-
-- (void) didReceiveMemoryWarning {
-	[[GMImageCacheLRU sharedImageCache] clearCache];
-	
-	[super didReceiveMemoryWarning];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
