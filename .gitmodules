@@ -7,3 +7,9 @@
 [submodule "OHAttributedLabel"]
 	path = OHAttributedLabel
 	url = git://github.com/nxtbgthng/OHAttributedLabel
+[submodule "CocoaSoundCloudAPI"]
+	path = CocoaSoundCloudAPI
+	url = git://github.com/soundcloud/CocoaSoundCloudAPI
+[submodule "CocoaSoundCloudUI"]
+	path = CocoaSoundCloudUI
+	url = git://github.com/soundcloud/CocoaSoundCloudUI
