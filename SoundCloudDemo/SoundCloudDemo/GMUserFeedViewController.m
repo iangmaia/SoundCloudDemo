@@ -120,18 +120,14 @@
 }
 
 - (void) loadUserImageWithUrl:(NSString*)url {
-	dispatch_queue_t queue = dispatch_queue_create("ianscdemo.ImgLoaderQueue", NULL);
-	
-	dispatch_async(queue, ^{
-		NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *res, NSData *imageData, NSError *err) {
 		UIImage *image = [UIImage imageWithData:imageData];
 		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			userImage.image = image;
-		});
-	});
-	
-	dispatch_release(queue);
+        userImage.image = image;
+    }];
 }
 
 - (void) errorFetchingData {

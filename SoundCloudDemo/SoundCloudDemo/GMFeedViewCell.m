@@ -47,7 +47,8 @@ static NSDateFormatter *scDateFormatter;
 }
 
 
-+ (GMFeedViewCell*) getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withFeedData:(NSDictionary*)feed {
++ (GMFeedViewCell*) getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
+                           withFeedData:(NSDictionary*)feed {
     static NSString * const identifier = @"GMFeedViewCell";
 
 	GMFeedViewCell *cell = (GMFeedViewCell*) [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -104,7 +105,6 @@ static NSDateFormatter *scDateFormatter;
 	return cell;
 }
 
-/* TODO: internationalize (NSLocalizedString...) */
 - (NSString*) timeAgoStringWithStrDate:(NSString*)strdate {
 	NSString *timeUnit = nil;
 	NSInteger timeAmount = 0;
@@ -168,40 +168,36 @@ static NSDateFormatter *scDateFormatter;
 		return;
 	}
 
-	dispatch_queue_t queue = dispatch_queue_create("ianscdemo.ImgLoaderQueue", NULL);
-
-	dispatch_async(queue, ^{
-		NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-		if (!imageData || ![imageData length]) {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *res, NSData *imageData, NSError *err) {
+        if (![imageData length] || err) {
 			return;
 		}
-		
+
 		UIImage *image = [UIImage imageWithData:imageData];
 		
-		//if is a wave, cut the half of the image
+        //if it is a wave, cut the half of the image
 		if (isWaveForm) {
-			UIGraphicsBeginImageContext( CGSizeMake(320, 71));
-			[image drawInRect:CGRectMake(0, 0, 320, 142)];
+			UIGraphicsBeginImageContext(CGSizeMake(320.0, 71.0));
+			[image drawInRect:CGRectMake(0, 0, 320.0, 142.0)];
 			image = UIGraphicsGetImageFromCurrentImageContext();
 			UIGraphicsEndImageContext();
 		}
-		
-		[imagesCache setObject:image forKey:url];
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			if ([[tableView indexPathsForVisibleRows] containsObject:cellIndex]) {
-				img.image = image;
-				if (isWaveForm) {
-					img.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:104.0/255.00 blue:13.0/255.0 alpha:1.0];
-					
-				}
 
-				[img setNeedsDisplay];
-			}
-		});
-	});
-	
-	dispatch_release(queue);
+        [imagesCache setObject:image forKey:url];
+
+        if ([[tableView indexPathsForVisibleRows] containsObject:cellIndex]) {
+            img.image = image;
+            if (isWaveForm) {
+                img.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:104.0/255.00 blue:13.0/255.0 alpha:1.0];
+                
+            }
+            
+            [img setNeedsDisplay];
+        }
+    }];
 }
 
 
