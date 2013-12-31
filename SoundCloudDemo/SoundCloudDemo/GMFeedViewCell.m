@@ -7,13 +7,12 @@
 //
 
 #import "GMFeedViewCell.h"
+#import "GMSoundCloudFeedItem.h"
+
 
 @interface GMFeedViewCell() {
     IBOutlet UILabel *trackLabel;
 	IBOutlet UILabel *userDateLabel;
-    
-	IBOutlet UIImageView *trackWaveImg;
-	IBOutlet UIImageView *userAvatarImg;
 }
 
 @end
@@ -21,7 +20,6 @@
 
 @implementation GMFeedViewCell
 
-static NSCache *imagesCache;
 static NSDateFormatter *scDateFormatter;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -36,71 +34,23 @@ static NSDateFormatter *scDateFormatter;
 			//2012/08/22 15:31:19 +0000
 			[scDateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss +0000"];
 		}
+        
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	
     return self;
 	
 }
 
-+ (GMFeedViewCell*)getFeedCellForTable:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
-                           withFeedData:(NSDictionary *)feed {
-    static NSString * const identifier = @"GMFeedViewCell";
-
-	GMFeedViewCell *cell = (GMFeedViewCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
+- (void)configureWithFeedData:(GMSoundCloudFeedItem *)data {
+	trackLabel.text = data.title;
 	
-	if (cell == nil) {
-		cell = [[[NSBundle mainBundle] loadNibNamed:@"GMFeedViewCell" owner:self options:nil] objectAtIndex:0];
-
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	}
+	NSString *formattedDate = [self timeAgoStringWithStrDate:data.createdAt];
 	
-	NSString *artWorkUrl = [feed objectForKey:@"artwork_url"];
-	if (!artWorkUrl || ((NSNull*)artWorkUrl == [NSNull null])) {
-		artWorkUrl = [[feed objectForKey:@"user"] objectForKey:@"avatar_url"];
-		
-		if (!artWorkUrl || ((NSNull*)artWorkUrl == [NSNull null])) {
-			artWorkUrl = nil;
-		}
-	}
-	
-	UIImage *artWorkImg = [imagesCache objectForKey:artWorkUrl];
-	if (artWorkImg) {
-		cell->userAvatarImg.image = artWorkImg;
-		[cell setNeedsDisplay];
-	} else {
-		cell->userAvatarImg.image = nil;
-		[cell->userAvatarImg setNeedsDisplay];
-		
-		[cell loadImageForTableView:tableView withUrl:artWorkUrl toImageView:cell->userAvatarImg
-					onCellIndexPath:indexPath isWaveForm:NO];
-	}
-	
-	UIImage *usrWaveImg = [imagesCache objectForKey:[feed objectForKey:@"waveform_url"]];
-	if (usrWaveImg) {
-		cell->trackWaveImg.image = usrWaveImg;
-		cell->trackWaveImg.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:104.0/255.00 blue:13.0/255.0 alpha:1.0];
-		
-		[cell->trackWaveImg setNeedsDisplay];
-	} else {
-		cell->trackWaveImg.image = nil;
-		cell->trackWaveImg.backgroundColor = [UIColor grayColor];
-		[cell->trackWaveImg setNeedsDisplay];
-		
-		[cell loadImageForTableView:tableView withUrl:[feed objectForKey:@"waveform_url"] toImageView:cell->trackWaveImg
-					onCellIndexPath:indexPath isWaveForm:YES];
-	}
-
-	
-	cell->trackLabel.text = [feed objectForKey:@"title"];
-	
-	NSString *formattedDate = [cell timeAgoStringWithStrDate:[feed objectForKey:@"created_at"]];
-	
-	cell->userDateLabel.text = [NSString stringWithFormat:@"By %@, %@", [[feed objectForKey:@"user"] objectForKey:@"username"], formattedDate];
-	
-	return cell;
+	userDateLabel.text = [NSString stringWithFormat:@"By %@, %@", data.userName, formattedDate];
 }
 
-- (NSString*) timeAgoStringWithStrDate:(NSString*)strdate {
+- (NSString *) timeAgoStringWithStrDate:(NSString*)strdate {
 	NSString *timeUnit = nil;
 	NSInteger timeAmount = 0;
 
@@ -154,46 +104,5 @@ static NSDateFormatter *scDateFormatter;
 	
 	return [NSString stringWithFormat:@"%d %@ ago", (int) timeAmount, timeUnit];
 }
-
-- (void)loadImageForTableView:(UITableView*)tableView withUrl:(NSString*)url toImageView:(UIImageView*)img
-			   onCellIndexPath:(NSIndexPath*)cellIndex isWaveForm:(BOOL)isWaveForm {
-
-	//TODO: set a "no image" standard image
-	if (!url) {
-		return;
-	}
-
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue]
-                           completionHandler:^(NSURLResponse *res, NSData *imageData, NSError *err) {
-        if (![imageData length] || err) {
-			return;
-		}
-
-		UIImage *image = [UIImage imageWithData:imageData];
-		
-        //if it is a wave, cut the half of the image
-		if (isWaveForm) {
-			UIGraphicsBeginImageContext(CGSizeMake(320.0, 71.0));
-			[image drawInRect:CGRectMake(0, 0, 320.0, 142.0)];
-			image = UIGraphicsGetImageFromCurrentImageContext();
-			UIGraphicsEndImageContext();
-		}
-
-        [imagesCache setObject:image forKey:url];
-
-        if ([[tableView indexPathsForVisibleRows] containsObject:cellIndex]) {
-            img.image = image;
-            if (isWaveForm) {
-                img.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:104.0/255.00 blue:13.0/255.0 alpha:1.0];
-                
-            }
-            
-            [img setNeedsDisplay];
-        }
-    }];
-}
-
 
 @end

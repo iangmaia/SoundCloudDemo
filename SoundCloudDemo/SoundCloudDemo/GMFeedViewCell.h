@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class GMSoundCloudFeedItem;
 @interface GMFeedViewCell : UITableViewCell
 
-+ (GMFeedViewCell *)getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
-                           withFeedData:(NSDictionary*)feed;
+- (void)configureWithFeedData:(GMSoundCloudFeedItem *)data;
+
+@property (nonatomic, strong) IBOutlet UIImageView *trackWaveImg;
+@property (nonatomic, strong) IBOutlet UIImageView *userAvatarImg;
 
 @end

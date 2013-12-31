@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C1E1DE818730EE2003D4656 /* GMSoundCloudFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1E1DE718730EE2003D4656 /* GMSoundCloudFeedItem.m */; };
 		3C3AAADB15E2850300D3E30B /* GMUserFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */; };
 		3C3AAADC15E2850300D3E30B /* GMUserFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */; };
 		3C41849615DD90D600FD9E12 /* GMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C41849415DD90D600FD9E12 /* GMLoginViewController.m */; };
@@ -141,6 +142,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C1E1DE618730EE2003D4656 /* GMSoundCloudFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSoundCloudFeedItem.h; sourceTree = "<group>"; };
+		3C1E1DE718730EE2003D4656 /* GMSoundCloudFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSoundCloudFeedItem.m; sourceTree = "<group>"; };
 		3C3AAAD815E2850300D3E30B /* GMUserFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUserFeedViewController.h; sourceTree = "<group>"; };
 		3C3AAAD915E2850300D3E30B /* GMUserFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUserFeedViewController.m; sourceTree = "<group>"; };
 		3C3AAADA15E2850300D3E30B /* GMUserFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMUserFeedViewController.xib; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 				3C8A0F1F15E41D79009A396F /* GMFeedViewCell.h */,
 				3C8A0F2015E41D79009A396F /* GMFeedViewCell.m */,
 				3C8A0F2415E41E6B009A396F /* GMFeedViewCell.xib */,
+				3C1E1DE618730EE2003D4656 /* GMSoundCloudFeedItem.h */,
+				3C1E1DE718730EE2003D4656 /* GMSoundCloudFeedItem.m */,
 				3CEAE72815DAFD1E00A4F175 /* GMAppDelegate.h */,
 				3CEAE72915DAFD1E00A4F175 /* GMAppDelegate.m */,
 				3CEAE72015DAFD1E00A4F175 /* Supporting Files */,
@@ -504,6 +509,7 @@
 				3CEAE72615DAFD1E00A4F175 /* main.m in Sources */,
 				3CEAE72A15DAFD1E00A4F175 /* GMAppDelegate.m in Sources */,
 				3C41849615DD90D600FD9E12 /* GMLoginViewController.m in Sources */,
+				3C1E1DE818730EE2003D4656 /* GMSoundCloudFeedItem.m in Sources */,
 				3C3AAADB15E2850300D3E30B /* GMUserFeedViewController.m in Sources */,
 				3C8A0F2115E41D79009A396F /* GMFeedViewCell.m in Sources */,
 			);
