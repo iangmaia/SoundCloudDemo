@@ -13,20 +13,13 @@
 
 #import "GMUserFeedViewController.h"
 
-@interface GMLoginViewController ()
+@interface GMLoginViewController () {
+    IBOutlet UIButton *loginButton;
+}
 
 @end
 
 @implementation GMLoginViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (IBAction)loginButtonClick:(id)sender {
 	SCLoginViewControllerCompletionHandler handler = ^(NSError *error) {
@@ -40,42 +33,21 @@
 	};
 	
 	[SCSoundCloud requestAccessWithPreparedAuthorizationURLHandler:^(NSURL *preparedURL) {
-		SCLoginViewController *loginViewController;
-		
-		loginViewController = [SCLoginViewController
-							   loginViewControllerWithPreparedURL:preparedURL
-							   completionHandler:handler];
-		[self presentModalViewController:loginViewController animated:YES];
+		SCLoginViewController *loginViewController = [SCLoginViewController loginViewControllerWithPreparedURL:preparedURL
+                                                                                             completionHandler:handler];
+		[self presentViewController:loginViewController animated:YES completion:nil];
 	}];
 }
 
 #pragma mark - 
 #pragma mark view lifecycle
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
 	if ([SCSoundCloud account]) {
-		GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] initWithNibName:@"GMUserFeedViewController" bundle:nil];
+		GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] init];
 		userFeed.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 		[self presentViewController:userFeed animated:YES completion:nil];
 	}
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

@@ -15,31 +15,29 @@
 #import "SCRequest.h"
 
 @interface GMUserFeedViewController ()
-	- (void) reloadSoundCloudData;
-	- (void) requestUserTracks;
-	- (void) loadUserImageWithUrl:(NSString*)url;
-	- (void) errorFetchingData;
+
 @end
 
 @implementation GMUserFeedViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
+#pragma mark -
+#pragma mark view controller lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self reloadSoundCloudData];
 }
 
-- (IBAction)logoutButtonClick:(id)sender {
-	NSLog(@"Logging out");
-	
-	[SCRequest cancelRequest:userRequestObj];
-	[SCRequest cancelRequest:tracksRequestObj];
+#pragma mark - 
 
-	[SCSoundCloud removeAccess];
-	
-	[self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)logoutButtonClick:(id)sender {
+    NSLog(@"Logging out");
+
+    [SCRequest cancelRequest:userRequestObj];
+    [SCRequest cancelRequest:tracksRequestObj];
+
+    [SCSoundCloud removeAccess];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)reloadButtonClick:(id)sender {
@@ -48,171 +46,147 @@
 
 #pragma mark -
 #pragma mark data fetching methods
-- (void) reloadSoundCloudData {
-	[SCRequest cancelRequest:userRequestObj];
-	[SCRequest cancelRequest:tracksRequestObj];
-	
-	[activityIndicator startAnimating];
+- (void)reloadSoundCloudData {
+    [SCRequest cancelRequest:userRequestObj];
+    [SCRequest cancelRequest:tracksRequestObj];
 
-	SCRequestResponseHandler userResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error){
-		// Handle the response
-		if (error) {
-			NSLog(@"Ooops, something went wrong with request: %@", [error localizedDescription]);
-			
-			[activityIndicator stopAnimating];
+    [activityIndicator startAnimating];
 
-			[self errorFetchingData];
+    SCRequestResponseHandler userResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error){
+        // Handle the response
+        if (error) {
+            NSLog(@"Ooops, something went wrong with request: %@", [error localizedDescription]);
+            
+            [activityIndicator stopAnimating];
 
-		} else {
-			userData = [data objectFromJSONData];
-			//NSLog(@"%@", userData);
-			
-			[self loadUserImageWithUrl:[userData objectForKey:@"avatar_url"]];
-			
-			[self requestUserTracks];
-		}
-	};
-	
-	SCAccount *account = [SCSoundCloud account];
-	userRequestObj = [SCRequest performMethod:SCRequestMethodGET
-						   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me.json"]
-					  usingParameters:nil
-						  withAccount:account
-			   sendingProgressHandler:nil
-					  responseHandler:userResponseHandler];
+            [self errorFetchingData];
+
+        } else {
+            userData = [data objectFromJSONData];
+            //NSLog(@"%@", userData);
+            
+            [self loadUserImageWithUrl:[userData objectForKey:@"avatar_url"]];
+            
+            [self requestUserTracks];
+        }
+    };
+
+    SCAccount *account = [SCSoundCloud account];
+    userRequestObj = [SCRequest performMethod:SCRequestMethodGET
+                           onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me.json"]
+                      usingParameters:nil
+                          withAccount:account
+               sendingProgressHandler:nil
+                      responseHandler:userResponseHandler];
 }
 
 - (void) requestUserTracks {
-	[SCRequest cancelRequest:tracksRequestObj];
-	
-	[activityIndicator startAnimating];
+    [SCRequest cancelRequest:tracksRequestObj];
 
-	userTracksData = nil;
-	[feedTable reloadData];
+    [activityIndicator startAnimating];
 
-	SCRequestResponseHandler tracksResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error) {
-		[activityIndicator stopAnimating];
+    userTracksData = nil;
+    [feedTable reloadData];
 
-		// Handle the response
-		if (error) {
-			NSLog(@"Error fetching user's tracks");
-			
-			[self errorFetchingData];
-		}
-		else {
-			
-			userTracksData = [[data objectFromJSONData] objectForKey:@"collection"];
-			
-			[feedTable reloadData];
-			
-			//NSLog(@"%@", userTracksData);
-		}
-	};
-	
-	
-	SCAccount *account = [SCSoundCloud account];
-	tracksRequestObj = [SCRequest performMethod:SCRequestMethodGET
-							   onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"]
-						  usingParameters:nil
-							  withAccount:account
-				   sendingProgressHandler:nil
-						  responseHandler:tracksResponseHandler];
+    SCRequestResponseHandler tracksResponseHandler = ^(NSURLResponse *response, NSData *data, NSError *error) {
+        [activityIndicator stopAnimating];
+
+        // Handle the response
+        if (error) {
+            NSLog(@"Error fetching user's tracks");
+            
+            [self errorFetchingData];
+        }
+        else {
+            
+            userTracksData = [[data objectFromJSONData] objectForKey:@"collection"];
+            
+            [feedTable reloadData];
+            
+            //NSLog(@"%@", userTracksData);
+        }
+    };
+
+
+    SCAccount *account = [SCSoundCloud account];
+    tracksRequestObj = [SCRequest performMethod:SCRequestMethodGET
+                               onResource:[NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"]
+                          usingParameters:nil
+                              withAccount:account
+                   sendingProgressHandler:nil
+                          responseHandler:tracksResponseHandler];
 }
 
-- (void) loadUserImageWithUrl:(NSString*)url {
+- (void)loadUserImageWithUrl:(NSString*)url {
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
+
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *res, NSData *imageData, NSError *err) {
-		UIImage *image = [UIImage imageWithData:imageData];
-		
+        UIImage *image = [UIImage imageWithData:imageData];
+        
         userImage.image = image;
     }];
 }
 
-- (void) errorFetchingData {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
-										  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-	[alert show];
+- (void)errorFetchingData {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Feed error" message:@"Error fetching user's SoundCloud data" delegate:nil
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 #pragma mark -
-#pragma mark table related methods
+#pragma mark Table
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	NSNumber *trackId = [[[userTracksData objectAtIndex:indexPath.row] objectForKey:@"origin"] objectForKey:@"id"];
-	
-	NSString *urlStr = [NSString stringWithFormat:@"soundcloud:track:%@", trackId];
-	
-	NSURL *url = [NSURL URLWithString:urlStr];
 
-	if ([[UIApplication sharedApplication] canOpenURL:url]) {
-		[[UIApplication sharedApplication] openURL:url];
-	}
-	else {
-		NSString *permaLink = [[[userTracksData objectAtIndex:indexPath.row]
-							  objectForKey:@"origin"] objectForKey:@"permalink_url"];
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:permaLink]];
-	}
-	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSNumber *trackId = [[[userTracksData objectAtIndex:indexPath.row] objectForKey:@"origin"] objectForKey:@"id"];
+
+    NSString *urlStr = [NSString stringWithFormat:@"soundcloud:track:%@", trackId];
+
+    NSURL *url = [NSURL URLWithString:urlStr];
+
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else {
+        NSString *permaLink = [[[userTracksData objectAtIndex:indexPath.row]
+                              objectForKey:@"origin"] objectForKey:@"permalink_url"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:permaLink]];
+    }
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [userTracksData count];
+    return [userTracksData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	GMFeedViewCell *cell = [GMFeedViewCell getFeedCellForTable:tableView atIndexPath:indexPath
-												  withFeedData:[[userTracksData
-																 objectAtIndex:indexPath.row] objectForKey:@"origin"]];
-	
-	
-	return cell;
+
+    GMFeedViewCell *cell = [GMFeedViewCell getFeedCellForTable:tableView atIndexPath:indexPath
+                                                  withFeedData:[[userTracksData
+                                                                 objectAtIndex:indexPath.row] objectForKey:@"origin"]];
+
+
+    return cell;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	NSString *userNameStr = [userData objectForKey:@"username"];
-	
-	NSString *header = nil;
-	
-	if (userNameStr) {
-		header = [NSString stringWithFormat:@"%@ dashboard", userNameStr];
-	}
-	else {
-		header = @"Loading user data...";
-	}
-	
-	return header;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *userNameStr = [userData objectForKey:@"username"];
+
+    NSString *header = nil;
+
+    if (userNameStr) {
+        header = [NSString stringWithFormat:@"%@ dashboard", userNameStr];
+    }
+    else {
+        header = @"Loading user data...";
+    }
+
+    return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 120;
-}
-
-#pragma mark -
-#pragma mark view lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[self reloadSoundCloudData];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return 120;
 }
 
 @end

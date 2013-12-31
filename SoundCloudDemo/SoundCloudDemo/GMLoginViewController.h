@@ -8,12 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GMLoginViewController : UIViewController {
-	IBOutlet UIButton *loginButton;
-}
-
+@interface GMLoginViewController : UIViewController
 
 - (IBAction)loginButtonClick:(id)sender;
-
 
 @end

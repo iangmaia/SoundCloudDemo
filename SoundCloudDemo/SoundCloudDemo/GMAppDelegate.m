@@ -20,17 +20,14 @@
                    redirectURL:[NSURL URLWithString:@"iansoundclouddemo://soundcloud"]];
 }
 
-
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	
 	return YES;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
 	
 	GMLoginViewController *loginVC = [[GMLoginViewController alloc] init];
 	UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:loginVC];

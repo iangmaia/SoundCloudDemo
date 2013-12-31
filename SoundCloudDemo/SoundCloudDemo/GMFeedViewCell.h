@@ -8,15 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GMFeedViewCell : UITableViewCell {
-	IBOutlet UILabel *trackLabel;
-	IBOutlet UILabel *userDateLabel;
+@interface GMFeedViewCell : UITableViewCell
 
-	IBOutlet UIImageView *trackWaveImg;
-	IBOutlet UIImageView *userAvatarImg;
-}
-
-
-+ (GMFeedViewCell*) getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withFeedData:(NSDictionary*)feed;
++ (GMFeedViewCell *)getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
+                           withFeedData:(NSDictionary*)feed;
 
 @end

@@ -8,12 +8,13 @@
 
 #import "GMFeedViewCell.h"
 
-@interface GMFeedViewCell()
-
-- (void) loadImageForTableView:(UITableView*)tableView withUrl:(NSString*)url toImageView:(UIImageView*)img
-			   onCellIndexPath:(NSIndexPath*)cellIndex isWaveForm:(BOOL)isWaveForm;
-
-- (NSString*) timeAgoStringWithStrDate:(NSString*)strdate;
+@interface GMFeedViewCell() {
+    IBOutlet UILabel *trackLabel;
+	IBOutlet UILabel *userDateLabel;
+    
+	IBOutlet UIImageView *trackWaveImg;
+	IBOutlet UIImageView *userAvatarImg;
+}
 
 @end
 
@@ -41,17 +42,11 @@ static NSDateFormatter *scDateFormatter;
 	
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-}
-
-
-+ (GMFeedViewCell*) getFeedCellForTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
-                           withFeedData:(NSDictionary*)feed {
++ (GMFeedViewCell*)getFeedCellForTable:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
+                           withFeedData:(NSDictionary *)feed {
     static NSString * const identifier = @"GMFeedViewCell";
 
-	GMFeedViewCell *cell = (GMFeedViewCell*) [tableView dequeueReusableCellWithIdentifier:identifier];
+	GMFeedViewCell *cell = (GMFeedViewCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
 	
 	if (cell == nil) {
 		cell = [[[NSBundle mainBundle] loadNibNamed:@"GMFeedViewCell" owner:self options:nil] objectAtIndex:0];
@@ -160,7 +155,7 @@ static NSDateFormatter *scDateFormatter;
 	return [NSString stringWithFormat:@"%d %@ ago", (int) timeAmount, timeUnit];
 }
 
-- (void) loadImageForTableView:(UITableView*)tableView withUrl:(NSString*)url toImageView:(UIImageView*)img
+- (void)loadImageForTableView:(UITableView*)tableView withUrl:(NSString*)url toImageView:(UIImageView*)img
 			   onCellIndexPath:(NSIndexPath*)cellIndex isWaveForm:(BOOL)isWaveForm {
 
 	//TODO: set a "no image" standard image
