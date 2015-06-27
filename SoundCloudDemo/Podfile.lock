@@ -1,0 +1,54 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - CocoaSoundCloudAPI (1.0.1):
+    - NXOAuth2Client (= 1.2.1)
+  - CocoaSoundCloudUI (1.0.5):
+    - CocoaSoundCloudAPI (~> 1.0.1)
+    - JSONKit
+    - OHAttributedLabel
+  - DateTools (1.6.1)
+  - JSONKit (1.5pre)
+  - NXOAuth2Client (1.2.1)
+  - OHAttributedLabel (3.5.5)
+
+DEPENDENCIES:
+  - AFNetworking (= 2.5.4)
+  - CocoaSoundCloudAPI (= 1.0.1)
+  - CocoaSoundCloudUI (= 1.0.5)
+  - DateTools (= 1.6.1)
+  - JSONKit (from `https://gist.githubusercontent.com/iangmaia/59d7e151eab6f7742a1a/raw/5fead2dc3cf9410a32eaa97e2029731d86dae026/JSONKit.podspec`)
+
+EXTERNAL SOURCES:
+  JSONKit:
+    :podspec: https://gist.githubusercontent.com/iangmaia/59d7e151eab6f7742a1a/raw/5fead2dc3cf9410a32eaa97e2029731d86dae026/JSONKit.podspec
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  CocoaSoundCloudAPI: e8e1f2e463fa9bb9d68b2dcf361572787c7a6c3f
+  CocoaSoundCloudUI: 4deb5ffe558d0b60d0aaeaf2420dda7aa31cb239
+  DateTools: 9bcc89e4f2f9004d8a7a2bd1b49269cf78968e65
+  JSONKit: 94a64b60e1149467809a0d74f6e42083cb9714f2
+  NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
+  OHAttributedLabel: 9b2eb99323dee6b3a81ef3bc8e98b084117bca2d
+
+COCOAPODS: 0.35.0

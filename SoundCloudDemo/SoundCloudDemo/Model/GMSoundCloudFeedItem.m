@@ -8,9 +8,19 @@
 
 #import "GMSoundCloudFeedItem.h"
 
+static NSDateFormatter *scDateFormatter;
+
 @implementation GMSoundCloudFeedItem
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        scDateFormatter = [[NSDateFormatter alloc] init];
+        [scDateFormatter setLocale:[NSLocale systemLocale]];
+        [scDateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        [scDateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss +0000"];
+    });
+    
     self = [super init];
     if (self) {
         NSDictionary *origin = [dict objectForKey:@"origin"];
@@ -28,12 +38,11 @@
         }
         _artworkURL = artwork;
 
-        _waveformURL = [origin objectForKey:@"waveform_url"];
-        
         _title = [origin objectForKey:@"title"];
         
         _createdAt = [origin objectForKey:@"created_at"];
-        
+        _createdAtDate = [scDateFormatter dateFromString:_createdAt];
+
         _userName = [[origin objectForKey:@"user"] objectForKey:@"username"];
     }
     return self;

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GMUserFeedViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@class GMSoundCloudHelper;
+
+@interface GMUserFeedViewController : UIViewController
+
+- (instancetype)initWithSoundCloudHelper:(GMSoundCloudHelper *)soundCloudHelper;
 
 @end

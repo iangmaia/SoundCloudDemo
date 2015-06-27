@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class GMSoundCloudHelper;
+
 @interface GMLoginViewController : UIViewController
 
-- (IBAction)loginButtonClick:(id)sender;
+- (instancetype)initWithSoundCloudHelper:(GMSoundCloudHelper *)soundCloudHelper;
 
 @end

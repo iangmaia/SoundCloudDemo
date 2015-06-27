@@ -7,47 +7,63 @@
 //
 
 #import "GMLoginViewController.h"
-#import "SCSoundCloud.h"
-#import "SCLoginViewController.h"
-#import "SCUIErrors.h"
-
 #import "GMUserFeedViewController.h"
 
+#import "GMSoundCloudHelper.h"
+
+#import <SCLoginViewController.h>
+
 @interface GMLoginViewController () {
-    IBOutlet UIButton *loginButton;
+    GMSoundCloudHelper *_soundCloudHelper;
 }
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
 @implementation GMLoginViewController
 
-- (IBAction)loginButtonClick:(id)sender {
-	SCLoginViewControllerCompletionHandler handler = ^(NSError *error) {
-		if (SC_CANCELED(error)) {
-			NSLog(@"Canceled!");
-		} else if (error) {
-			NSLog(@"Login error");
-		} else {
-			NSLog(@"User has logged in");
-		}
-	};
-	
-	[SCSoundCloud requestAccessWithPreparedAuthorizationURLHandler:^(NSURL *preparedURL) {
-		SCLoginViewController *loginViewController = [SCLoginViewController loginViewControllerWithPreparedURL:preparedURL
-                                                                                             completionHandler:handler];
-		[self presentViewController:loginViewController animated:YES completion:nil];
-	}];
+- (instancetype)init {
+    return [self initWithSoundCloudHelper:nil];
 }
 
-#pragma mark - 
-#pragma mark view lifecycle
+- (instancetype)initWithSoundCloudHelper:(GMSoundCloudHelper *)soundCloudHelper {
+    NSParameterAssert(soundCloudHelper);
+    self = [super init];
+    if (self) {
+        _soundCloudHelper = soundCloudHelper;
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.titleLabel.text = NSLocalizedString(@"login_title", @"Login screen title");
+    [self.loginButton setTitle:NSLocalizedString(@"login_button", @"Login button title.") forState:UIControlStateNormal];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
-	if ([SCSoundCloud account]) {
-		GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] init];
-		userFeed.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		[self presentViewController:userFeed animated:YES completion:nil];
-	}
+    if ([_soundCloudHelper isUserLoggedIn]) {
+        GMUserFeedViewController *userFeed = [[GMUserFeedViewController alloc] initWithSoundCloudHelper:_soundCloudHelper];
+        userFeed.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:userFeed animated:YES completion:nil];
+    }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma mark -
+
+- (IBAction)loginButtonClick:(id)sender {
+    __weak GMLoginViewController *weakSelf = self;
+    [_soundCloudHelper createUserLoginForm:^(SCLoginViewController *loginVC) {
+        [weakSelf presentViewController:loginVC animated:YES completion:nil];
+    }];
+
 }
 
 @end

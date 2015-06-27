@@ -1,0 +1,8 @@
+platform :ios, '8.0'
+
+pod 'AFNetworking', '2.5.4'
+pod 'CocoaSoundCloudAPI', '1.0.1'
+pod 'CocoaSoundCloudUI', '1.0.5'
+pod 'DateTools', '1.6.1'
+pod 'JSONKit', :podspec => 'https://gist.githubusercontent.com/iangmaia/59d7e151eab6f7742a1a/raw/5fead2dc3cf9410a32eaa97e2029731d86dae026/JSONKit.podspec'
+
